@@ -40,7 +40,8 @@
     "release": "np",
     "dev": "esno src/index.ts",
     "start": "node dist/index.cjs",
-    "test": "vitest"
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
   },
   "sideEffects": false,
   "peerDependencies": {
