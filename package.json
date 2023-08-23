@@ -1,0 +1,59 @@
+{
+  "name": "@kolhe/colors",
+  "version": "0.0.1",
+  "description": "A small utility library to generate different shades for tailwind ",
+  "keywords": [
+    "tailwind",
+    "tailwindcss",
+    "palette",
+    "color",
+    "shades"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/sumitkolhe/colors",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumitkolhe/colors"
+  },
+  "author": "",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "unbuild",
+    "lint": "eslint . --ext .js,.ts,.json,.json5,.vue --fix",
+    "pretty": "prettier --write .",
+    "prepublishOnly": "yarn build",
+    "release": "np",
+    "dev": "esno src/index.ts",
+    "start": "node dist/index.cjs",
+    "test": "vitest"
+  },
+  "sideEffects": false,
+  "peerDependencies": {
+    "vue": "^3.2.33"
+  },
+  "devDependencies": {
+    "@kolhe/eslint-config": "^1.2.6",
+    "eslint": "^8.47.0",
+    "esno": "^0.17.0",
+    "np": "^8.0.4",
+    "prettier": "^3.0.2",
+    "typescript": "^5.1.6",
+    "unbuild": "^2.0.0",
+    "vitest": "^0.34.2"
+  }
+}
