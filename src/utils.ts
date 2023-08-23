@@ -1,6 +1,28 @@
-export type ColorVariantFunction = (r: number, g: number, b: number, intensity: number) => number[]
+export type ColorTransformationFunction = (
+  r: number,
+  g: number,
+  b: number,
+  intensity: number
+) => number[]
 
-export function toRgb(color: string): number[] {
+const applyTransformation =
+  (transformationFn: ColorTransformationFunction) => (intensity: number) =>
+    ((r: number, g: number, b: number): number[] =>
+      transformationFn(r, g, b, intensity)) as ColorTransformationFunction
+
+export const withTint = applyTransformation((r, g, b, intensity) => [
+  r + (255 - r) * intensity,
+  g + (255 - g) * intensity,
+  b + (255 - b) * intensity,
+])
+
+export const withShade = applyTransformation((r, g, b, intensity) => [
+  r * intensity,
+  g * intensity,
+  b * intensity,
+])
+
+export const toRgb = (color: string): number[] => {
   const hexMatch = /^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i.exec(color)
   const shortHexMatch = /^#?([\da-f])([\da-f])([\da-f])$/i.exec(color)
   const rgbMatch = /^rgb\((\d{1,3}),(\d{1,3}),(\d{1,3})\)$/i.exec(color)
@@ -17,20 +39,3 @@ export function toRgb(color: string): number[] {
 
   throw new Error('Invalid color format! Use #ABC or #AABBCC or rgb(1,2,3)')
 }
-
-const applyVariant =
-  (variantFn: ColorVariantFunction) =>
-  (intensity: number) =>
-  (r: number, g: number, b: number): number[] =>
-    variantFn(r, g, b, intensity)
-
-export const withTint = applyVariant((r, g, b, intensity) => [
-  r + (255 - r) * intensity,
-  g + (255 - g) * intensity,
-  b + (255 - b) * intensity,
-])
-export const withShade = applyVariant((r, g, b, intensity) => [
-  r * intensity,
-  g * intensity,
-  b * intensity,
-])

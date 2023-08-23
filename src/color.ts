@@ -1,7 +1,9 @@
 import { toRgb, withShade, withTint } from './utils'
-import type { ColorVariantFunction } from './utils'
+import type { ColorTransformationFunction } from './utils'
 
-const colorVariants: Record<string, ColorVariantFunction> = {
+export type ColorVariants = Record<number, ColorTransformationFunction>
+
+const colorVariants: ColorVariants = {
   0: withTint(1),
   50: withTint(0.95),
   100: withTint(0.9),
@@ -17,17 +19,18 @@ const colorVariants: Record<string, ColorVariantFunction> = {
   1000: withShade(0),
 }
 
-export function getColors(baseColor: string, variants = colorVariants) {
-  if (!baseColor) return {}
-
+export const getColors = (baseColor: string, variants: ColorVariants = colorVariants) => {
   const [r, g, b] = toRgb(baseColor)
 
-  return Object.fromEntries(
-    Object.entries(variants).map(([name, variantFn]) => [
-      name,
-      `#${variantFn(r, g, b, 1)
-        .map((value: number) => Math.round(value).toString(16).padStart(2, '0').toUpperCase())
-        .join('')}`,
-    ])
-  )
+  const result: Record<number, string> = {}
+
+  for (const [name, variantFn] of Object.entries(variants)) {
+    const variantNumber = Number.parseInt(name, 10)
+    const variantHex = variantFn(r, g, b, 1)
+      .map((value: number) => Math.round(value).toString(16).padStart(2, '0').toUpperCase())
+      .join('')
+    result[variantNumber] = `#${variantHex}`
+  }
+
+  return result
 }
