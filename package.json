@@ -1,6 +1,6 @@
 {
   "name": "@kolhe/colors",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "A small utility library to generate different shades for tailwind ",
   "keywords": [
     "tailwind",
@@ -56,5 +56,8 @@
     "typescript": "^5.1.6",
     "unbuild": "^2.0.0",
     "vitest": "^0.34.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
