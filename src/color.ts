@@ -4,7 +4,6 @@ import type { ColorTransformationFunction } from './utils'
 export type ColorVariants = Record<number, ColorTransformationFunction>
 
 const colorVariants: ColorVariants = {
-  0: withTint(1),
   50: withTint(0.95),
   100: withTint(0.9),
   200: withTint(0.75),
@@ -16,7 +15,6 @@ const colorVariants: ColorVariants = {
   800: withShade(0.6),
   900: withShade(0.45),
   950: withShade(0.29),
-  1000: withShade(0),
 }
 
 export const getColors = (baseColor: string, variants: ColorVariants = colorVariants) => {
