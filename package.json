@@ -1,6 +1,6 @@
 {
   "name": "@kolhe/colors",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A small utility library to generate different shades for tailwind ",
   "keywords": [
     "tailwind",
